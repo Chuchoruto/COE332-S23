@@ -20,3 +20,8 @@ Run the site_generation.py script and then the time_calculation.py script in the
 This will print a list of travel times and sample times for each of n legs as well as the total investigation time.
 Each leg shows travel time from the previous leg or starting position to the next meteor site.
 
+Run the code as shown below.
+```
+python3 site_generation.py
+python3 time_calculation.py
+```
