@@ -21,7 +21,7 @@ def main():
 
 
     
-    with open('/home/lucal/COE332-S23/homework02/meteor_sites.json', 'w') as f:
+    with open('meteor_sites.json', 'w') as f:
         json.dump(sites, f, indent = 2)
 
 
