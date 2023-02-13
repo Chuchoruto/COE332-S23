@@ -25,6 +25,18 @@ test.py
 water_examination.py
 - This script examines the data pulled in from the request and outputs the water's turbidity, if it's above or below the safety threshold, and time to return below the threshold
 
+### Installations Necessary
+
+In order to run this code the following lines must be executed in the terminal to install pytest and requests
+
+```
+pip3 install --user pytest
+```
+```
+pip3 install --user requests
+```
+
+
 ### INSTRUCTIONS TO RUN
 
 First run the unit tests to ensure that the functions are working properly as shown below
