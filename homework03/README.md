@@ -49,3 +49,12 @@ Average turbidity based on most recent five measurements = 1.1506 NTU
 Warning: Turbidity is above threshold for safe use
 Minimum time required to return below a safe threshold = 6.95 hours
 ```
+
+These results show that the water is not currently safe for use because the turbidity is over 1 NTU. It also shows that the water will be safe again in 6.95 hours.
+
+In the case that the water is already safe, the output will look more like this:
+```
+Average turbidity based on most recent five measurements = 0.506 NTU
+Info: Turbidity is below threshold for safe use
+Minimum time required to return below a safe threshold = 0.00 hours
+```
