@@ -58,3 +58,5 @@ Average turbidity based on most recent five measurements = 0.506 NTU
 Info: Turbidity is below threshold for safe use
 Minimum time required to return below a safe threshold = 0.00 hours
 ```
+
+This shows that the water is safe for use as the turbidity is below 1 NTU.
