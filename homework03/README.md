@@ -27,7 +27,7 @@ water_examination.py
 
 ### Installations Necessary
 
-In order to run this code the following lines must be executed in the terminal to install pytest and requests
+In order to run this code, the following lines must be executed in the terminal to install pytest and requests
 
 ```
 pip3 install --user pytest
