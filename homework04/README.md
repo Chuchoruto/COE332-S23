@@ -35,6 +35,13 @@ pip3 install xmltodict
 ### Flask App
 The Flask App I have created runs the app on a local port and actively queries data from the dataset linked above based on the user's curl input
 
+| Curl Route  | Output      |
+| ----------- | ----------- |
+| `/`      | Entire Dataset       |
+| `/epochs`   | All Epochs in the Dataset        |
+| `/epochs/<epoch>`| State Vector of the specific Epoch |
+| `/epochs/<epoch>/speed` | Speed of the specific Epoch |
+
 ### INSTRUCTIONS TO RUN
 Run the following code in the terminal to begin the flask app
 ```
