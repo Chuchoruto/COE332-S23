@@ -58,7 +58,7 @@ def allEpochs():
 
 # Returns the state vector for a sepcific EPOCH when called
 @app.route('/epochs/<epoch>', methods = ['GET'])
-def specEpoch(epoch):
+def specEpoch(epoch: str):
     """
     This takes a specific EPOCH string value and returns its state vector below
 
@@ -78,7 +78,7 @@ def specEpoch(epoch):
 
 
 @app.route('/epochs/<epoch>/speed', methods = ['GET'])
-def epochSpeed(epoch):
+def epochSpeed(epoch: str):
     """
     This takes a specific EPOCH string value and returns the speed of the ISS at the given epoch
 
