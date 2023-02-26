@@ -37,7 +37,7 @@ def location():
     data = get_data()
     return data
 
-@app.route('/epochs/', methods = ['GET'])
+@app.route('/epochs', methods = ['GET'])
 # Returns the list of all EPOCH names when called
 def allEpochs():
     """
