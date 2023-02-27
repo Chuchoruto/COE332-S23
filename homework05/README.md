@@ -1,8 +1,7 @@
 
 # ISS TRACKER
 
-This project provides relevant data to the user about the ISS
-It helps determine the speed and location of the ISS at given times
+This project provides relevant data to the user about the ISS. It helps determine the speed and location of the ISS at given times
 
 ### Data Used
 
@@ -21,7 +20,7 @@ data = xmltodict.parse(response.text)
 
 ### Script/Flask App
 `iss_tracker.py`
-The Flask App I have created runs the app on a local port and actively queries data from the dataset linked above based on the user's curl input
+The Flask App I have created runs the app on a local port and actively queries data from the dataset linked above based on the user's curl input.
 
 | Curl Route  | Method   | Output      |
 | ----------- | -------- | ----------- |
@@ -40,7 +39,7 @@ The Flask App I have created runs the app on a local port and actively queries d
 
 Installations Necessary
 
-In order to start the flask app, the following lines must be executed in the terminal to install pytest and requests
+In order to start the flask app, the following lines must be executed in the terminal to install dependencies
 
 ```
 pip3 install flask
@@ -57,7 +56,7 @@ Run the following code in the terminal to begin the flask app
 flask --app iss_tracker --debug run
 ```
 
-Then in a separate terminal run the curl commands such as
+Then in a separate terminal run curl commands such as
 ```
 curl localhost:5000/help
 ```
@@ -74,6 +73,11 @@ docker pull lucalabardini/iss_tracker:hw05
 Run the Flask app using the prebuilt image
 ```
 docker run -it --rm -p 5000:5000 lucalabardini/iss_tracker:hw05
+```
+
+Then in a separate terminal run curl commands such as
+```
+curl localhost:5000/help
 ```
 
 #### Method 3 - Building image from dockerfile
@@ -98,9 +102,18 @@ Run the Flask app using the newly built image
 docker run -it --rm -p 5000:5000 <username>/iss_tracker:<tag>
 ```
 
+Then in a separate terminal run curl commands such as
+```
+curl localhost:5000/help
+```
 
 
-### Example Input/Output
+### Example Input/Output and Usage
+
+#### Important Note
+Data is loaded into the flask app from the web upon running the app. All curl commands will work when the flask app starts.
+
+
 
 Below are examples of certain inputs that the user can put into the separate terminal
 
@@ -170,9 +183,9 @@ Should return the whole dataset which looks something like
 
 Running the command:
 ```
-curl localhost:5000/epochs/
+curl localhost:5000/epochs
 ```
-Should return a list of all the epoch values in the dataset which looks something like this
+Should return a list of all the epoch values in the dataset which looks something like this but much longer
 ```
 [
   "2023-063T11:31:00.000Z",
@@ -186,6 +199,27 @@ Should return a list of all the epoch values in the dataset which looks somethin
   "2023-063T12:00:00.000Z"
 ]
 ```
+Query parameters for list of epoch values in the set
+```
+curl 'localhost:5000/epochs?limit=int&offset=int'
+```
+limit sets the number of results returned by the app. offset sets the starting index of the epochs to be printed.
+For example
+```
+curl 'localhost:5000/epochs?limit=5&offset=2'
+```
+Will return
+```
+[
+  "2023-055T12:08:00.000Z",
+  "2023-055T12:12:00.000Z",
+  "2023-055T12:16:00.000Z",
+  "2023-055T12:20:00.000Z",
+  "2023-055T12:24:00.000Z"
+]
+```
+
+
 Running the command:
 ```
 curl localhost:5000/epochs/<epoch>
@@ -230,3 +264,28 @@ Should return the speed of the epoch specified in the angled brackets which will
   "Speed": 7.661757196327827
 }
 ```
+
+Running the following command:
+```
+curl -X DELETE localhost:5000/delete-data
+```
+Should return one of
+```
+Data deleted successfully
+```
+Or
+```
+Data has already been deleted. Repost first using /post-data
+```
+This means that the data has been deleted from the App and must be reloaded using the /post-data route
+
+
+Running the following command:
+```
+curl -X POST localhost:5000/post-data
+```
+Should return
+```
+Data Posted Successfully
+```
+This means that the data was reloaded into the flask app and all of the other routes will now work properly again
