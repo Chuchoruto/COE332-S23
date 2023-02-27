@@ -261,7 +261,7 @@ curl localhost:5000/epochs/<epoch>/speed
 Should return the speed of the epoch specified in the angled brackets which will look like this
 ```
 {
-  "Speed": 7.661757196327827
+  "Speed (km/s)": 7.661757196327827
 }
 ```
 

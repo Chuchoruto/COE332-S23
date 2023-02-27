@@ -131,7 +131,7 @@ def epochSpeed(epoch: str) -> dict:
                 yV = float(e["Y_DOT"]["#text"])
                 zV = float(e["Z_DOT"]["#text"])
                 speed = math.sqrt(xV*xV + yV*yV + zV*zV)
-                return {"Speed": speed}
+                return {"Speed (km/s)": speed}
     except NameError:
         return "Data has been deleted and must be reposted first using /post-data\n"
     
