@@ -6,7 +6,7 @@ import math
 app = Flask(__name__)
 
 
-def get_data():
+def get_data() -> list:
     """
     This function returns all of the data in the set
 
