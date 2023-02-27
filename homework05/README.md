@@ -35,7 +35,7 @@ The Flask App I have created runs the app on a local port and actively queries d
 ### INSTRUCTIONS TO RUN
 
 
-#### Method 1 - Installing Dpendencie Manually
+#### Method 1 - Installing Dpendencies Manually
 
 Installations Necessary
 
@@ -62,6 +62,7 @@ curl localhost:5000/help
 ```
 
 #### Method 2 - Pulling Docker image from Dockerhub
+
 
 
 
