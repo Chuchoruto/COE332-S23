@@ -203,7 +203,7 @@ Query parameters for list of epoch values in the set
 ```
 curl 'localhost:5000/epochs?limit=int&offset=int'
 ```
-limit sets the number of results returned by the app. offset sets the starting index of the epochs to be printed.
+limit sets the number of results returned by the app. offset sets the starting index of the epochs to be printed. The query will only accept ints. Any other type will cause an error.
 For example
 ```
 curl 'localhost:5000/epochs?limit=5&offset=2'
