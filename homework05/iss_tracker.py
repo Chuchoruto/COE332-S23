@@ -8,7 +8,7 @@ app = Flask(__name__)
 data = {}
 
 
-def get_data():
+def get_data() -> list:
     """
     This function returns all of the data in the set
 
@@ -28,7 +28,7 @@ data = get_data()
 
 # This method is called in the default curl command w/o more arguments
 @app.route('/', methods = ['GET'])
-def location():
+def location() -> list:
     """
     This function returns all of the data in the set
 
@@ -47,7 +47,7 @@ def location():
 
 @app.route('/epochs', methods = ['GET'])
 # Returns the list of all EPOCH names when called
-def allEpochs():
+def allEpochs() -> list:
     """
     This function returns all of the EPOCHs in the set
 
@@ -88,7 +88,7 @@ def allEpochs():
 
 # Returns the state vector for a sepcific EPOCH when called
 @app.route('/epochs/<epoch>', methods = ['GET'])
-def specEpoch(epoch: str):
+def specEpoch(epoch: str) -> dict:
     """
     This takes a specific EPOCH string value and returns its state vector below
 
@@ -112,7 +112,7 @@ def specEpoch(epoch: str):
 
 
 @app.route('/epochs/<epoch>/speed', methods = ['GET'])
-def epochSpeed(epoch: str):
+def epochSpeed(epoch: str) -> dict:
     """
     This takes a specific EPOCH string value and returns the speed of the ISS at the given epoch
 
@@ -139,7 +139,7 @@ def epochSpeed(epoch: str):
 
 
 @app.route('/delete-data', methods = ['DELETE'])
-def deleteData():
+def deleteData() -> str:
     """
     This Deletes the global data dictionary object
 
@@ -159,7 +159,7 @@ def deleteData():
 
 
 @app.route('/post-data', methods = ['POST'])
-def postData():
+def postData() -> str:
     """
     This Posts data to the global data dictionary object
 
@@ -175,7 +175,7 @@ def postData():
     return "Data Posted Successfully\n"
 
 @app.route('/help', methods=['GET'])
-def help():
+def help() -> str:
     """
     This function returns a brief description of all available routes (plus their methods) for this API.
 
