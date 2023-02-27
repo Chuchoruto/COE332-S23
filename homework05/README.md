@@ -61,10 +61,41 @@ Then in a separate terminal run the curl commands such as
 curl localhost:5000/help
 ```
 
-#### Method 2 - Pulling Docker image from Dockerhub
+#### Method 2 - Pulling prebuilt Docker image from Dockerhub and running Flask app
 
+Run the following commands in terminal:
 
+Pull docker image from docker hub
+```
+docker pull lucalabardini/iss_tracker:hw05
+```
 
+Run the Flask app using the prebuilt image
+```
+docker run -it --rm -p 5000:5000 lucalabardini/iss_tracker:hw05
+```
+
+#### Method 3 - Building image from dockerfile
+
+Make sure you are in the directory with the dockerfile and iss_tracker.py script
+
+Run ls and make sure output looks like this
+```
+ls
+```
+```
+Dockerfile README.md iss_tracker.py
+```
+
+Build your image using the dockerfile
+```
+docker build -t <username>/iss_tracker:<tag> .
+```
+
+Run the Flask app using the newly built image
+```
+docker run -it --rm -p 5000:5000 <username>/iss_tracker:<tag>
+```
 
 
 
