@@ -174,6 +174,41 @@ def postData():
     
     return "Data Posted Successfully\n"
 
+@app.route('/help', methods=['GET'])
+def help():
+    """
+    This function returns a brief description of all available routes (plus their methods) for this API.
+
+    Args:
+        NA
+        
+    Returns:
+        A string of human readable text that lists all available routes and their methods.
+    """
+    return '''
+    Available routes:
+    
+    GET /
+    Returns all data in the set.
+    
+    GET /epochs
+    Returns a list of all EPOCHs in the set.
+
+    GET /epochs?limit=int&offset=int
+    Returns a list of EPOCHs in the set starting at the offset index and printing a total of limit results.
+    
+    GET /epochs/<epoch>
+    Returns the state vector for a specific EPOCH.
+    
+    GET /epochs/<epoch>/speed
+    Returns the speed of the ISS at a specific EPOCH.
+    
+    POST /post-data
+    Posts data to the global data dictionary object.
+    
+    DELETE /delete-data
+    Deletes the global data dictionary object.
+    '''
 
 
 if __name__ == '__main__':
