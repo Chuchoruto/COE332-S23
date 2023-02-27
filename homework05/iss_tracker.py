@@ -38,8 +38,11 @@ def location():
     Returns:
         A list of dictionaries that represent the data in the set of ISS Locations
     """
-    global data
-    
+    try:
+        global data
+        return data
+    except NameError:
+        return "Data has been deleted and must be reposted first using /post-data\n"
     return data
 
 @app.route('/epochs', methods = ['GET'])
@@ -59,12 +62,14 @@ def allEpochs():
     try:
         limit = int(request.args.get('limit', len(data)))
     except ValueError:
-        return "Bad input\n",400
+        return "Bad input. Please enter an int\n",400
+    except NameError:
+        return "Data has been deleted and must be reposted first using /post-data\n"
 
     try:
         offset = int(request.args.get('offset', 0))
     except ValueError:
-        return "Bad input\n",400
+        return "Bad input. Please enter an int\n",400
 
     
     epochs = []
@@ -95,9 +100,12 @@ def specEpoch(epoch: str):
     """
     global data
 
-    for e in data:
-        if (e["EPOCH"] == epoch):
-            return e
+    try:
+        for e in data:
+            if (e["EPOCH"] == epoch):
+                return e
+    except NameError:
+        return "Data has been deleted and must be reposted first using /post-data\n"
     
     return "Error: Epoch not found\n"
 
@@ -116,32 +124,56 @@ def epochSpeed(epoch: str):
     """
     
     global data
-
-    for e in data:
-        if (e["EPOCH"] == epoch):
-            xV = float(e["X_DOT"]["#text"])
-            yV = float(e["Y_DOT"]["#text"])
-            zV = float(e["Z_DOT"]["#text"])
-            speed = math.sqrt(xV*xV + yV*yV + zV*zV)
-            return {"Speed": speed}
+    try:
+        for e in data:
+            if (e["EPOCH"] == epoch):
+                xV = float(e["X_DOT"]["#text"])
+                yV = float(e["Y_DOT"]["#text"])
+                zV = float(e["Z_DOT"]["#text"])
+                speed = math.sqrt(xV*xV + yV*yV + zV*zV)
+                return {"Speed": speed}
+    except NameError:
+        return "Data has been deleted and must be reposted first using /post-data\n"
     
     return "Error: Epoch not found\n"
 
 
 @app.route('/delete-data', methods = ['DELETE'])
 def deleteData():
+    """
+    This Deletes the global data dictionary object
+
+    Args:
+        NA
+        
+    Returns:
+        Data Deleted Successfully or Data Already Deleted if calling the data variable causes a NameError
+    """
     global data
-    del data
-    return "Data deleted\n"
+    try:
+        del data
+    except NameError:
+        return "Data has already been deleted. Repost first using /post-data\n"
+    return "Data deleted successfully\n"
 
 
 
 @app.route('/post-data', methods = ['POST'])
 def postData():
+    """
+    This Posts data to the global data dictionary object
+
+    Args:
+        NA
+        
+    Returns:
+        Data Posted Successfully after setting the global data variable to the dataset requested
+    """
     global data
     data = get_data()
     
     return "Data Posted Successfully\n"
+
 
 
 if __name__ == '__main__':
