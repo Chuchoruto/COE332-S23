@@ -60,7 +60,7 @@ flask --app iss_tracker --debug run
 
 Then in a separate terminal run curl commands such as
 ```
-curl localhost:5000/help
+curl 'localhost:5000/help'
 ```
 
 #### Method 2 - Pulling prebuilt Docker image from Dockerhub and running Flask app
@@ -79,7 +79,7 @@ docker run -it --rm -p 5000:5000 lucalabardini/iss_tracker:hw05
 
 Then in a separate terminal run curl commands such as
 ```
-curl localhost:5000/help
+curl 'localhost:5000/help'
 ```
 
 #### Method 3 - Building image from dockerfile
@@ -106,7 +106,7 @@ docker run -it --rm -p 5000:5000 <username>/iss_tracker:<tag>
 
 Then in a separate terminal run curl commands such as
 ```
-curl localhost:5000/help
+curl 'localhost:5000/help'
 ```
 
 
@@ -121,7 +121,7 @@ Below are examples of certain inputs that the user can put into the separate ter
 
 Running the command:
 ```
-curl localhost:5000/
+curl 'localhost:5000/'
 ```
 Should return the whole dataset which looks something like
 ```
@@ -185,7 +185,7 @@ Should return the whole dataset which looks something like
 
 Running the command:
 ```
-curl localhost:5000/epochs
+curl 'localhost:5000/epochs'
 ```
 Should return a list of all the epoch values in the dataset which looks something like this but much longer
 ```
@@ -224,7 +224,7 @@ Will return
 
 Running the command:
 ```
-curl localhost:5000/epochs/<epoch>
+curl 'localhost:5000/epochs/<epoch>'
 ```
 Should return the state vector of the specific epoch specified in the angled brackets which will look like this
 ```
@@ -258,7 +258,7 @@ Should return the state vector of the specific epoch specified in the angled bra
 ```
 Running the following command:
 ```
-curl localhost:5000/epochs/<epoch>/speed
+curl 'localhost:5000/epochs/<epoch>/speed'
 ```
 Should return the speed of the epoch specified in the angled brackets which will look like this
 ```
@@ -269,7 +269,7 @@ Should return the speed of the epoch specified in the angled brackets which will
 
 Running the following command:
 ```
-curl -X DELETE localhost:5000/delete-data
+curl -X DELETE 'localhost:5000/delete-data'
 ```
 Should return one of
 ```
@@ -284,7 +284,7 @@ This means that the data has been deleted from the App and must be reloaded usin
 
 Running the following command:
 ```
-curl -X POST localhost:5000/post-data
+curl -X POST 'localhost:5000/post-data'
 ```
 Should return
 ```
