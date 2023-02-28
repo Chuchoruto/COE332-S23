@@ -8,7 +8,8 @@ This project provides relevant data to the user about the ISS. It helps determin
 The data used is accessed from the link https://spotthestation.nasa.gov/trajectory_data.cfm
 It is loaded into the script via API request from the Python requests library as follows
 
-All positional data is on kilometers and all velocities and speeds are in km/s
+All positional data is on kilometers and all velocities and speeds are in km/s.
+There is more information about the state vector information on the website linked aboce.
 
 ```
 import requests
