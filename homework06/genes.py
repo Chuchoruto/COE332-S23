@@ -87,7 +87,7 @@ def get_hgnc(hgnc_id) -> dict:
         all data associated with the given <hgnc_id>
     '''
     if len(rd.keys()) == 0:
-        return "Database is empty. Please post data. \n"
+        return "The database is empty. Please post the data first\n"
 
     for key in rd.keys():
         if key.decode('utf-8') == hgnc_id:
