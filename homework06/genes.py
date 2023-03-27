@@ -48,6 +48,8 @@ def ret_data():
     elif request.method == 'DELETE':
         rd.flushdb()
         return f'data deleted there are {len(rd.keys())} keys in the db\n'
+
+    
     
     else:
         return 'the method you tried does not work\n'
@@ -65,17 +67,33 @@ def get_hgnc_list() -> list:
     '''
     hgnc_list = []
 
-    for item in rd.keys():
-        hgnc = json.loads(rd.get(item))
-        key = hgnc["hgnc_id"]
+    for key in rd.keys():
+        key = key.decode('utf-8')
         hgnc_list.append(key)
     return hgnc_list
 
 
+@app.route('/genes/<hgnc_id>', methods = ['GET'])
+def get_hgnc(hgnc_id) -> dict:
+    '''
+    Return all data associated with <hgnc_id>
+
+    ROUTE: /gene/<hgnc_id>
+
+    Args:
+        hgnc_id:    The unique hgnc ID of the gene in the data set
     
+    Returns:
+        all data associated with the given <hgnc_id>
+    '''
+    if len(rd.keys()) == 0:
+        return "Database is empty. Please post data. \n"
 
+    for key in rd.keys():
+        if key.decode('utf-8') == hgnc_id:
+            return json.loads(rd.get(key))
 
-
+    return "Given ID did not match any IDs in the Data base\n"
 
 
 if __name__ == '__main__':
