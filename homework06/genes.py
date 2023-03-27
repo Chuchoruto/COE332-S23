@@ -43,11 +43,11 @@ def ret_data():
         for item in response.json()['response']['docs']:
             key = f'{item["hgnc_id"]}'
             rd.set(key, json.dumps(item))
-        return 'data posted\n'
+        return 'Data has been posted\n'
 
     elif request.method == 'DELETE':
         rd.flushdb()
-        return f'data deleted there are {len(rd.keys())} keys in the db\n'
+        return f'Data had ben deleted. There are {len(rd.keys())} keys in the db\n'
 
     
     
