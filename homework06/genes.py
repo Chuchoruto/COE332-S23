@@ -61,7 +61,7 @@ def get_hgnc_list() -> list:
     Args: NONE
 
     Returns:
-        id_list: List of all the hgnc IDs
+        hgnc_list: List of all the hgnc IDs
     '''
     hgnc_list = []
 
