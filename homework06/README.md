@@ -21,7 +21,7 @@ response = requests.get(url)
 
 
 ### Script/Flask App
-`iss_tracker.py`
+`genes.py`
 The Flask App I have created runs the app on a local port and actively queries data from the dataset linked above based on the user's curl input.
 
 | Curl Route  | Method   | Output      |
