@@ -14,7 +14,7 @@ services:
             dockerfile: ./Dockerfile
         depends_on:
             - redis-db
-        image: jthet/gene_api:1.0
+        image: lucalabardini/genes:1.0
         ports:
             - 5000:5000
         volumes:
