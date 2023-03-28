@@ -7,7 +7,7 @@ import json
 app = Flask(__name__)
 
 def get_redis_client():
-    return redis.Redis(host='0.0.0.0', port=6379, db=0)
+    return redis.Redis(host='redis-db', port=6379, db=0)
 rd = get_redis_client()
 
 
@@ -78,8 +78,6 @@ def get_hgnc(hgnc_id) -> dict:
     '''
     Return all data associated with <hgnc_id>
 
-    ROUTE: /gene/<hgnc_id>
-
     Args:
         hgnc_id:    The unique hgnc ID of the gene in the data set
     
@@ -93,7 +91,7 @@ def get_hgnc(hgnc_id) -> dict:
         if key.decode('utf-8') == hgnc_id:
             return json.loads(rd.get(key))
 
-    return "Given ID did not match any IDs in the Data base\n"
+    return "Given hgnc_id did not match any in the database\n"
 
 
 if __name__ == '__main__':
