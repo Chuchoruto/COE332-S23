@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lucal-test-flask-deployment
+  labels:
+    username: lucal
+    env: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lucal-test-flask
+  template:
+    metadata:
+      labels:
+        app: lucal-test-flask
+        username: lucal
+        env: test
+    spec:
+      containers:
+        - name: flask
+          image: lucalabardini/genes:1.0
+          imagePullPolicy: Always
+          env:
+            - name: REDIS_HOST
+              value: lucal-test-redis-service
+          ports:
+            - containerPort: 5000

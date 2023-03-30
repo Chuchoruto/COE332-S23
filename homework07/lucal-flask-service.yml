@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lucal-test-flask-service
+  labels:
+    username: lucal
+    env: test
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 5000
+    targetPort: 5000
+  selector:
+    app: lucal-test-flask
+    username: lucal
+    env: test
