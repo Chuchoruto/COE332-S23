@@ -13,7 +13,7 @@ services:
             context: ./
             dockerfile: ./Dockerfile
         depends_on:
-            - lucal-test-redis-service
+            - redis-db
         image: lucalabardini/genes:1.0
         ports:
             - 5000:5000
