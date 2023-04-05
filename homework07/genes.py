@@ -35,7 +35,7 @@ def ret_data():
     if request.method == 'GET':
         output_list = []
         for item in rd.keys():
-            value = rd.get(item)
+            value = rd.get(item).decode('utf-8')
             if value is not None and value.strip():
                 output_list.append(json.loads(value))
         return output_list
