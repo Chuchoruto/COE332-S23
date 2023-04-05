@@ -35,7 +35,9 @@ def ret_data():
     if request.method == 'GET':
         output_list = []
         for item in rd.keys():
-            output_list.append(json.loads(rd.get(item)))
+            value = rd.get(item)
+            if value is not None and value.strip():
+                output_list.append(json.loads(value))
         return output_list
     
     elif request.method == 'POST':
