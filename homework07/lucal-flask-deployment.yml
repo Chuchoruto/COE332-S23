@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: flask
-          image: lucalabardini/genes:hw7
+          image: lucalabardini/genes:hw7.1
           imagePullPolicy: Always
           env:
             - name: lucal-test-redis-service
