@@ -22,7 +22,7 @@ spec:
           image: lucalabardini/genes:hw7
           imagePullPolicy: Always
           env:
-            - name: REDIS_HOST
+            - name: lucal-test-redis-service
               value: lucal-test-redis-service
           ports:
             - containerPort: 5000
