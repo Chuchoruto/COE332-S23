@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lucal-test-redis-deployment
+  labels:  
+    username: lucal
+    env: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      username: lucal
+      env: test
+  template:
+    metadata:
+      labels:
+        app: lucal-test-redis
+        username: lucal
+        env: test
+    spec:
+      containers:
+        - name: redis
+          imagePullPolicy: Always
+          image: redis:7
+          env:
+          - name: FLASK_APP
+            value: "genes.py"
+          ports:
+          - name: http
+            containerPort: 6379
+          volumeMounts:
+          - name: redis-data
+            mountPath: /data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: lucal-test-redis-pvc
