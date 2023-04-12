@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 def get_redis_client():
-    redis_ip = os.environ.get('REDIS_IP')
+    redis_ip = os.environ.get('REDIS-IP')
     if not redis_ip:
         raise Exception()
     return redis.Redis(host=redis_ip, port=6379, db=0)
