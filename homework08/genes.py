@@ -78,7 +78,7 @@ def ret_image():
             HGNClist.append(int(value["hgnc_id"][5:]))
 
         fig, ax = plt.subplots()
-        ax.scatter(daysSince2000List, HGNClist)
+        ax.scatter(daysSince2000List, HGNClist,s=5,alpha=0.5)
         ax.set_title('ID Number vs Date Approved')
         ax.set_xlabel('Day approved since 2000')
         ax.set_ylabel('HGNC ID number')
