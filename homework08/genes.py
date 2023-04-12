@@ -3,6 +3,7 @@ import requests
 import redis
 import json
 import os
+import matplotlib.pyplot as plt
 
 
 app = Flask(__name__)
@@ -12,7 +13,58 @@ def get_redis_client():
     if not redis_ip:
         raise Exception()
     return redis.Redis(host=redis_ip, port=6379, db=0)
+
+def get_redis_image_db():
+    redis_ip = os.environ.get('REDIS-IP')
+    if not redis_ip:
+        raise Exception()
+    return redis.Redis(host=redis_ip, port=6379, db=1)
+
 rd = get_redis_client()
+
+rd_image = get_redis_image_db()
+
+
+
+
+
+@app.route('/image', methods = ['POST', 'GET', 'DELETE'])
+def ret_image():
+    '''
+    Manipulates image data with GET, POST, and DELETE methods
+    
+    Args: None
+
+    Methods:
+        "DELETE" method: deletes all data in redis db
+        "POST" method: posts data into redis db
+        "GET" method: returns data from redis db
+
+    Returns:
+        "DELETE" method: String confirming data deletion
+        "POST" method: String confirming data posted
+        "GET" method: returns data from redis db in the form of a list of dictionaries
+        
+    '''
+
+    if request.method == 'GET':
+        someurl = "imgur url"
+        return someurl
+    
+    elif request.method == 'POST':
+        
+        return 'Data has been posted\n'
+
+    elif request.method == 'DELETE':
+        rd.flushdb()
+        return f'Data had ben deleted. There are {len(rd.keys())} keys in the db\n'
+
+    
+    
+    else:
+        return 'the method you tried does not work\n'
+
+
 
 
 
