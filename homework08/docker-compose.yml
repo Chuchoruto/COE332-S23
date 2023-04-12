@@ -14,7 +14,9 @@ services:
             dockerfile: ./Dockerfile
         depends_on:
             - redis-db
-        image: lucalabardini/genes:1.0
+        environment:
+            REDIS-IP: redis-db
+        image: lucalabardini/genes:hw8
         ports:
             - 5000:5000
         volumes:

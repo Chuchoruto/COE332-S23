@@ -2,12 +2,16 @@ from flask import Flask, request
 import requests
 import redis
 import json
+import os
 
 
 app = Flask(__name__)
 
 def get_redis_client():
-    return redis.Redis(host='lucal-test-redis-service', port=6379, db=0)
+    redis_ip = os.environ.get('REDIS_IP')
+    if not redis_ip:
+        raise Exception()
+    return redis.Redis(host=redis_ip, port=6379, db=0)
 rd = get_redis_client()
 
 

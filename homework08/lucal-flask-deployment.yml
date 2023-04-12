@@ -19,10 +19,10 @@ spec:
     spec:
       containers:
         - name: flask
-          image: lucalabardini/genes:hw7.2
+          image: lucalabardini/genes:hw8
           imagePullPolicy: Always
           env:
-            - name: lucal-test-redis-service
-              value: lucal-test-redis-service
+            - name: REDIS-IP
+              value: redis-db
           ports:
             - containerPort: 5000
