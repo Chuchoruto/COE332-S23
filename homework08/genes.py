@@ -1,9 +1,11 @@
-from flask import Flask, request
+from flask import Flask, request, send_file
 import requests
 import redis
 import json
 import os
 import matplotlib.pyplot as plt
+from datetime import datetime, date
+import io
 
 
 app = Flask(__name__)
@@ -47,12 +49,46 @@ def ret_image():
         
     '''
 
+
     if request.method == 'GET':
-        someurl = "imgur url"
-        return someurl
-    
-    elif request.method == 'POST':
+        plot_bytes = rd_image.get("Plot")
+
+        # Load the bytes as an image
+        buf = io.BytesIO(plot_bytes)
+        buf.seek(0)
+        # Return the image as a file to the user
+        return send_file(buf, mimetype='image/png')
         
+            
+    # Make plot of Date vs ID number
+    elif request.method == 'POST':
+        daysSince2000List = []
+        HGNClist = []
+        for item in rd.keys():
+            
+            value = rd.get(item).decode('utf-8')
+            value = json.loads(value)
+            date_str = value["date_approved_reserved"]
+            parsed_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+            reference_date = date(2000, 1, 1)
+            delta = parsed_date - reference_date
+            days_since_2000 = delta.days
+            daysSince2000List.append(days_since_2000)
+            HGNClist.append(int(value["hgnc_id"][5:]))
+
+        fig, ax = plt.subplots()
+        ax.scatter(daysSince2000List, HGNClist)
+        ax.set_title('ID Number vs Date Approved')
+        ax.set_xlabel('Day approved since 2000')
+        ax.set_ylabel('HGNC ID number')
+
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+
+        rd_image.set("Plot", buf.getvalue())
+
         return 'Data has been posted\n'
 
     elif request.method == 'DELETE':
