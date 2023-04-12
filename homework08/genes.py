@@ -92,8 +92,8 @@ def ret_image():
         return 'Data has been posted\n'
 
     elif request.method == 'DELETE':
-        rd.flushdb()
-        return f'Data had ben deleted. There are {len(rd.keys())} keys in the db\n'
+        rd_image.flushdb()
+        return f'Data had ben deleted. There are {len(rd.keys())} plots in the db\n'
 
     
     
