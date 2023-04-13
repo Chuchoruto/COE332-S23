@@ -31,6 +31,9 @@ The Flask App I have created runs the app on a local port and actively queries d
 | `/data`      | DELETE |Confirmation message of deleted data from redis-db |
 | `/genes`      | GET |List of all gene HGNC_IDs in the set |
 | `/genes/<hgnc_id>`      | GET |Dictionary of the relevant data from the specific HGNC_ID gene|
+| `/image`      | GET |Plot image       |
+| `/image`      | POST |Confirmation message of posted plot to redis-db |
+| `/image`      | DELETE |Confirmation message of deleted plot from redis-db |
 
 
 ### INSTRUCTIONS TO RUN
