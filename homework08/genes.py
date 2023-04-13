@@ -39,20 +39,20 @@ def ret_image():
 
     Methods:
         "DELETE" method: deletes all data in redis db
-        "POST" method: posts data into redis db
-        "GET" method: returns data from redis db
+        "POST" method: posts plot into redis db
+        "GET" method: returns plot from redis db
 
     Returns:
         "DELETE" method: String confirming data deletion
         "POST" method: String confirming data posted
-        "GET" method: returns data from redis db in the form of a list of dictionaries
+        "GET" method: returns plot from redis db in a file specified by udes
         
     '''
 
 
     if request.method == 'GET':
         if(len(rd_image.keys())== 0):
-            return "No image in the database. use /image -X POST first.\n"
+            raise Exception("No image in the database. use /image -X POST first.\n")
         else:
             plot_bytes = rd_image.get("Plot")
 
@@ -66,7 +66,7 @@ def ret_image():
     # Make plot of Date vs ID number
     elif request.method == 'POST':
         if(len(rd.keys()) == 0):
-            return "No data to create image from. please use /data -X POST first.\n"
+            raise Exception("No data to create image from. please use /data -X POST first.\n") 
         else:
             daysSince2000List = []
             HGNClist = []
@@ -95,11 +95,11 @@ def ret_image():
 
             rd_image.set("Plot", buf.getvalue())
 
-            return 'Data has been posted\n'
+            return 'Plot has been posted\n'
 
     elif request.method == 'DELETE':
         rd_image.flushdb()
-        return f'Data had ben deleted. There are {len(rd_image.keys())} plots in the db\n'
+        return f'Plot has ben deleted. There are {len(rd_image.keys())} plots in the db\n'
 
     
     
