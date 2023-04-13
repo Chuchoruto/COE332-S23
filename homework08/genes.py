@@ -86,7 +86,7 @@ def ret_image():
             fig, ax = plt.subplots()
             ax.scatter(daysSince2000List, HGNClist,s=5,alpha=0.5)
             ax.set_title('ID Number vs Date Approved')
-            ax.set_xlabel('Day approved since 2000')
+            ax.set_xlabel('Days since approval. Reference: January 1, 2000')
             ax.set_ylabel('HGNC ID number')
 
             buf = io.BytesIO()
