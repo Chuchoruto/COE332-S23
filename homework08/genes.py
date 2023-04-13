@@ -51,49 +51,55 @@ def ret_image():
 
 
     if request.method == 'GET':
-        plot_bytes = rd_image.get("Plot")
+        if(len(rd_image.keys())== 0):
+            return "No image in the database. use /image -X POST first.\n"
+        else:
+            plot_bytes = rd_image.get("Plot")
 
-        # Load the bytes as an image
-        buf = io.BytesIO(plot_bytes)
-        buf.seek(0)
-        # Return the image as a file to the user
-        return send_file(buf, mimetype='image/png')
+            # Load the bytes as an image
+            buf = io.BytesIO(plot_bytes)
+            buf.seek(0)
+            # Return the image as a file to the user
+            return send_file(buf, mimetype='image/png')
         
             
     # Make plot of Date vs ID number
     elif request.method == 'POST':
-        daysSince2000List = []
-        HGNClist = []
-        for item in rd.keys():
-            
-            value = rd.get(item).decode('utf-8')
-            value = json.loads(value)
-            date_str = value["date_approved_reserved"]
-            parsed_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        if(len(rd.keys()) == 0):
+            return "No data to create image from. please use /data -X POST first.\n"
+        else:
+            daysSince2000List = []
+            HGNClist = []
+            for item in rd.keys():
+                
+                value = rd.get(item).decode('utf-8')
+                value = json.loads(value)
+                date_str = value["date_approved_reserved"]
+                parsed_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
-            reference_date = date(2000, 1, 1)
-            delta = parsed_date - reference_date
-            days_since_2000 = delta.days
-            daysSince2000List.append(days_since_2000)
-            HGNClist.append(int(value["hgnc_id"][5:]))
+                reference_date = date(2000, 1, 1)
+                delta = parsed_date - reference_date
+                days_since_2000 = delta.days
+                daysSince2000List.append(days_since_2000)
+                HGNClist.append(int(value["hgnc_id"][5:]))
 
-        fig, ax = plt.subplots()
-        ax.scatter(daysSince2000List, HGNClist,s=5,alpha=0.5)
-        ax.set_title('ID Number vs Date Approved')
-        ax.set_xlabel('Day approved since 2000')
-        ax.set_ylabel('HGNC ID number')
+            fig, ax = plt.subplots()
+            ax.scatter(daysSince2000List, HGNClist,s=5,alpha=0.5)
+            ax.set_title('ID Number vs Date Approved')
+            ax.set_xlabel('Day approved since 2000')
+            ax.set_ylabel('HGNC ID number')
 
-        buf = io.BytesIO()
-        plt.savefig(buf, format='png')
-        buf.seek(0)
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
 
-        rd_image.set("Plot", buf.getvalue())
+            rd_image.set("Plot", buf.getvalue())
 
-        return 'Data has been posted\n'
+            return 'Data has been posted\n'
 
     elif request.method == 'DELETE':
         rd_image.flushdb()
-        return f'Data had ben deleted. There are {len(rd.keys())} plots in the db\n'
+        return f'Data had ben deleted. There are {len(rd_image.keys())} plots in the db\n'
 
     
     
