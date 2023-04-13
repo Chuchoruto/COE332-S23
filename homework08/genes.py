@@ -131,12 +131,15 @@ def ret_data():
     '''
 
     if request.method == 'GET':
-        output_list = []
-        for item in rd.keys():
-            value = rd.get(item).decode('utf-8')
-            if value is not None and value.strip():
-                output_list.append(json.loads(value))
-        return output_list
+        if len(rd.keys()) == 0:
+            return "The database is empty. Please post the data first\n"
+        else:
+            output_list = []
+            for item in rd.keys():
+                value = rd.get(item).decode('utf-8')
+                if value is not None and value.strip():
+                    output_list.append(json.loads(value))
+            return output_list
     
     elif request.method == 'POST':
         response = requests.get(url= 'https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
@@ -165,6 +168,9 @@ def get_hgnc_list() -> list:
     Returns:
         hgnc_list: List of all the hgnc IDs
     '''
+    if len(rd.keys()) == 0:
+        return "The database is empty. Please post the data first\n"
+
     hgnc_list = []
 
     for key in rd.keys():
