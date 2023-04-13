@@ -170,13 +170,13 @@ def get_hgnc_list() -> list:
     '''
     if len(rd.keys()) == 0:
         return "The database is empty. Please post the data first\n"
+    else:
+        hgnc_list = []
 
-    hgnc_list = []
-
-    for key in rd.keys():
-        key = key.decode('utf-8')
-        hgnc_list.append(key)
-    return hgnc_list
+        for key in rd.keys():
+            key = key.decode('utf-8')
+            hgnc_list.append(key)
+        return hgnc_list
 
 
 @app.route('/genes/<hgnc_id>', methods = ['GET'])
@@ -192,12 +192,12 @@ def get_hgnc(hgnc_id) -> dict:
     '''
     if len(rd.keys()) == 0:
         return "The database is empty. Please post the data first\n"
+    else:
+        for key in rd.keys():
+            if key.decode('utf-8') == hgnc_id:
+                return json.loads(rd.get(key))
 
-    for key in rd.keys():
-        if key.decode('utf-8') == hgnc_id:
-            return json.loads(rd.get(key))
-
-    return "Given hgnc_id did not match any in the database\n"
+        return "Given hgnc_id did not match any in the database\n"
 
 
 if __name__ == '__main__':
