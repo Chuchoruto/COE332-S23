@@ -36,11 +36,46 @@ The Flask App I have created runs the app on a local port and actively queries d
 | `/image`      | DELETE |Confirmation message of deleted plot from redis-db |
 
 
+
+
+
+### Kubernetes Notes
+
+If you change the redis service name, you must change the value of REDIS-IP to the new name
+```
+env:
+    - name: REDIS-IP
+      value: <SERVICE-NAME>
+```
+
+
+
+If you want to change 'REDIS-IP' to something else on this line
+```
+redis_ip = os.environ.get('REDIS-IP')
+```
+You umst also change this line in your docker-compose to whatever you have renamed it to
+```
+environment:
+    REDIS-IP: redis-db
+```
+
+
+
+
+
 ### INSTRUCTIONS TO RUN
 
 #### MUST DO!!!
 
-Make sure to be in the github repo directory for this project. Then type:
+git pull this repository
+
+run
+```
+cd COE332-S23/homework08
+```
+
+Then type:
 ```
 mkdir data
 ```
@@ -121,7 +156,7 @@ spec:
           image: YOUR_IMAGE_NAME_HERE
           imagePullPolicy: Always
           env:
-            - name: lucal-test-redis-service
+            - name: REDIS-IP
               value: lucal-test-redis-service
           ports:
             - containerPort: 5000
@@ -132,7 +167,7 @@ After that, follow the steps for Method 1 and you can begin testing the app
 
 Pull the docker image from dockerhub using
 ```
-docker pull lucalabardini/genes:1.0
+docker pull lucalabardini/genes:hw8
 ```
 
 Then simply type in the terminal:
@@ -408,4 +443,29 @@ Should return the information of gene id HGNC:1766
   "uuid": "59ea51cf-2caf-4b9e-9624-58c5e6d917ca",
   "vega_id": "OTTHUMG00000132800"
 }
+```
+
+```
+curl localhost:5000/image -X POST
+```
+Will return
+```
+Plot has been posted
+```
+```
+curl localhost:5000/image -X DELETE
+```
+will return
+```
+Plot has ben deleted. There are 0 plots in the db
+```
+
+```
+curl localhost:5000/image --output image.png
+```
+Will output an image file to the environment you are in.
+
+*If execed in to a py-debug-deployment*: Run the following to view the image
+```
+kubectl cp <py-debug-pod-name>:image.png <desired-path>image.png
 ```
