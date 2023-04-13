@@ -23,6 +23,6 @@ spec:
           imagePullPolicy: Always
           env:
             - name: REDIS-IP
-              value: redis-db
+              value: lucal-test-redis-service
           ports:
             - containerPort: 5000
