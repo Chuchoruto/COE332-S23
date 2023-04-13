@@ -52,7 +52,7 @@ def ret_image():
 
     if request.method == 'GET':
         if(len(rd_image.keys())== 0):
-            raise Exception("No image in the database. use /image -X POST first.\n")
+            return "No image in the database. use /image -X POST first.\n"
         else:
             plot_bytes = rd_image.get("Plot")
 
@@ -66,7 +66,7 @@ def ret_image():
     # Make plot of Date vs ID number
     elif request.method == 'POST':
         if(len(rd.keys()) == 0):
-            raise Exception("No data to create image from. please use /data -X POST first.\n") 
+            return "No data to create image from. please use /data -X POST first.\n"
         else:
             daysSince2000List = []
             HGNClist = []
